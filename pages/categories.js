@@ -143,7 +143,7 @@ function Categories({ swal }) {
           <select
             value={parentCategory}
             onChange={(ev) => {
-              console.log(ev.target.value);
+              //console.log(ev.target.value);
               setParentCategory(ev.target.value);
             }}
           >

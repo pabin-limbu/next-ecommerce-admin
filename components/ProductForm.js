@@ -58,7 +58,7 @@ export default function ProductForm({
 
   // Function to upload image.
   async function uploadImages(ev) {
-    console.log(ev);
+    //console.log(ev);
     const files = ev.target?.files;
 
     if (files?.length > 0) {

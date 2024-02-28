@@ -9,7 +9,7 @@ export default function OrdersPage() {
     axios.get("/api/orders").then((res) => setOrders(res.data));
   }, []);
 
-  console.log(orders);
+ // console.log(orders);
   return (
     <Layout>
       <h1>Orders</h1>

@@ -27,7 +27,7 @@ export default async function handle(req, res) {
   const client = new S3Client({
     region: "us-east-1",
     credentials: {
-      accessKeyId: process.env.S3_ACCESS_KEY,
+      accessKeyId: process.env.S3_ACCESS_KEY ,
       secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
     },
   });
@@ -38,7 +38,7 @@ export default async function handle(req, res) {
   for (const file of files.file) {
     const ext = file.originalFilename.split(".").pop();
     const newFilename = Date.now() + "." + ext;
-    console.log({ ext, file, newFilename });
+    //console.log({ ext, file, newFilename });
     await client.send(
       new PutObjectCommand({
         Bucket: bucketName,

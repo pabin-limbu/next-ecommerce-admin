@@ -3,12 +3,13 @@ import { useSession } from "next-auth/react";
 
 export default function Home() {
   const { data: session } = useSession();
-  // console.log(session);
+  //console.log(session);
 
   // if (!session) return;
   return (
     <Layout>
       <div className="text-blue-900 flex justify-between">
+        <p>helo</p>
         <h2>
           hello, <b>{session?.user?.name}</b>
         </h2>
