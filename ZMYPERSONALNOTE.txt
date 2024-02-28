@@ -1,0 +1,24 @@
+https://v3.yarnpkg.com/package/react-spinners  -- for spinner.
+yarn add react-sortablejs sortabejs-- for dragging picture back and forth.
+console.log(arguments) -- prints the arguments of fucntion
+
+
+use > usestate to fetch category at component mount and to refresh the page get the category again when category saves
+that way the state will be changed and the component will mount. getcategories have abolity to populate categories state.
+
+
+mongodb tips for parent id:
+-- if child have parent id the information of parent can be attatched with it using ref:
+ex: {name:String,type: mongoose.Types.ObjectId, ref: "Category"} -- this is model this refrence to category table.
+ex: Category.find().populate("parent") -- this is api this tells to populate parent column, where parent is categoryId type.
+
+this way when parent = categoryId it can fetch the whole data of that particular category id.
+
+https://v3.yarnpkg.com/ for popup.
+
+note: the delete api will not have the body so the data has to be sent via querry string.
+
+//login validation
+-- login validation must be both on nextauth file and in APi end point.
+-- check the email of session and compare it with our email that are white listed.
+
