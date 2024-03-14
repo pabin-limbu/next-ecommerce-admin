@@ -13,6 +13,8 @@ export default function ProductForm({
   images: existingImages,
   category: assignedCategory,
   properties: assignedProperties,
+  stats: assignedStats,
+  isFeatured: assignedIsFeatured,
 }) {
   const [title, setTitle] = useState(existingTitle || "");
   const [price, setPrice] = useState(existingPrice || "");
@@ -25,6 +27,8 @@ export default function ProductForm({
   const [productProperties, setProductProperties] = useState(
     assignedProperties || {}
   );
+  const [isFeatured, setIsFeatured] = useState(assignedIsFeatured || false);
+  const [stats, setStats] = useState(assignedStats || []);
 
   const router = useRouter();
 
@@ -44,7 +48,11 @@ export default function ProductForm({
       images,
       category,
       properties: productProperties,
+      isFeatured,
+      stats,
     };
+
+    // console.log(data);
     //Check if product contain _id or not , if it contain id that means it is for editing existing product.
     if (_id) {
       // UPDATE
@@ -112,6 +120,44 @@ export default function ProductForm({
       const newProductProps = { ...prev };
       newProductProps[propName] = value;
       return newProductProps;
+    });
+  }
+
+  //for properties.
+  function addStats() {
+    //add properties
+    console.log("add properties");
+    setStats((prev) => {
+      return [...prev, { name: "", value: "" }];
+    });
+  }
+
+  function handleStatsNameChange(index, property, newName) {
+    // properties ko array lai clone garne. jun index ma change garnu parne ho tyo index ko property change garne and return back gardena.
+    setStats((prev) => {
+      const tempProperties = [...prev];
+      tempProperties[index].name = newName;
+      return tempProperties;
+    });
+  }
+
+  function handleStatsValueChange(index, newValues) {
+    console.log(index, newValues);
+    // properties ko array lai clone garne. jun index ma change garnu parne ho tyo index ko property change garne and return back gardena.
+    setStats((prev) => {
+      const tempProperties = [...prev];
+      tempProperties[index].value = newValues;
+      return tempProperties;
+    });
+  }
+
+  function handleRemoveStats(indexToRemove) {
+    setStats((prev) => {
+      const newProperty = [...prev].filter((p, pIndex) => {
+        return pIndex !== indexToRemove; // filter the index and return remaining.
+      });
+
+      return newProperty;
     });
   }
 
@@ -216,6 +262,63 @@ export default function ProductForm({
         placeholder="description"
         onChange={(ev) => setDescription(ev.target.value)}
       ></textarea>
+
+      <div className="mb-2">
+        <label htmlFor="" className="block">
+          Stats
+        </label>
+        <button
+          type="button"
+          className="btn-default text-sm mb-2"
+          onClick={addStats}
+        >
+          Add New stats
+        </button>
+        {stats.length > 0 &&
+          stats.map((stat, index) => (
+            <div className="flex gap-1 mb-2" key={index}>
+              <input
+                className="mb-0"
+                type="text"
+                placeholder="Stats (example : color)"
+                value={stat.name}
+                onChange={(ev) =>
+                  handleStatsNameChange(index, stat, ev.target.value)
+                }
+              />
+              <input
+                className="mb-0"
+                type="text"
+                placeholder="Values"
+                value={stat.value}
+                onChange={(ev) =>
+                  handleStatsValueChange(index, ev.target.value)
+                }
+              />
+              <button
+                type="button"
+                className="btn-red text-sm"
+                onClick={() => handleRemoveStats(index)}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+      </div>
+
+      <div className="flex justify-start items-center w-full mb-5 ">
+        <label className=" w-30" htmlFor="">
+          Feature this product
+        </label>
+        <input
+          onChange={(ev) => {
+            setIsFeatured(ev.target.checked);
+          }}
+          className="m-0 w-10"
+          type="checkbox"
+          checked={isFeatured}
+        />
+      </div>
 
       <label htmlFor="">Price in (HKD)</label>
       <input

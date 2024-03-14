@@ -17,8 +17,16 @@ export default async function handle(req, res) {
 
   if (method === "POST") {
     console.log("i am in api/products post");
-    const { title, description, price, images, category, properties } =
-      req.body;
+    const {
+      title,
+      description,
+      price,
+      images,
+      category,
+      properties,
+      stats,
+      isFeatured,
+    } = req.body;
     //create a product.
     const productDoc = await Product.create({
       title,
@@ -27,6 +35,8 @@ export default async function handle(req, res) {
       images,
       category,
       properties,
+      stats,
+      isFeatured,
     });
 
     res.json(productDoc);
@@ -34,11 +44,29 @@ export default async function handle(req, res) {
 
   if (method === "PUT") {
     console.log("i am in a api/product put method");
-    const { title, description, price, images, category, properties, _id } =
-      req.body;
+    const {
+      title,
+      description,
+      price,
+      images,
+      category,
+      properties,
+      stats,
+      isFeatured,
+      _id,
+    } = req.body;
     await Product.updateOne(
       { _id: _id },
-      { title, description, price, images, category, properties }
+      {
+        title,
+        description,
+        price,
+        images,
+        category,
+        properties,
+        stats,
+        isFeatured,
+      }
     ); // later check the res from database and send the response.
     res.json(true);
   }

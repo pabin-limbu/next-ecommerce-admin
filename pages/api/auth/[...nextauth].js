@@ -19,12 +19,15 @@ export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
   callbacks: {
     session: ({ session, token, user }) => {
-      if (adminEmail.includes(session?.user?.email)) return session; // authorize the valid email to login the admin page.
-      return false;
+      //access to specific user.
+      // if (adminEmail.includes(session?.user?.email)) return session; // authorize the valid email to login the admin page.
+      //  return false;
+
+      //access to all user
+      return session;
     },
   },
   secret: process.env.JWT_SECRET,
-  
 };
 
 export default NextAuth(authOptions);

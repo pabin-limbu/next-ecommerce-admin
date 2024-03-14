@@ -10,6 +10,8 @@ function EditProductPage() {
   const router = useRouter();
   const { id } = router.query; // we can get id using useRouter hook .
 
+  console.log(productInfo)
+
   useEffect(() => {
     if (!id) {
       return;
