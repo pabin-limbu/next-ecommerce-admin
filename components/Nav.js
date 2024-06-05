@@ -74,6 +74,8 @@ export default function Nav({ show }) {
           <span>Products</span>
         </Link>
 
+        <Link href={"/banner"}>Banner</Link>
+
         <Link
           href={"/categories"}
           className={

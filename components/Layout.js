@@ -8,9 +8,6 @@ export default function Layout({ children }) {
 
   const { data: session } = useSession();
 
-  // const tempValue = process.env.NEXT_PUBLIC_TEST_ID;
-  // console.log({tempValue});
-  // console.log("pabin limbuF")
   if (!session) {
     return (
       <div

@@ -10,6 +10,7 @@ const productSchema = new Schema(
     properties: { type: Object },
     stats: [{ type: Object }],
     isFeatured: { type: Boolean },
+    isVintage: { type: Boolean },
   },
   { timestamps: true }
 );

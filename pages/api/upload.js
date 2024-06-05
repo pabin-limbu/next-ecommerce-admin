@@ -1,6 +1,6 @@
 import multiparty from "multiparty";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import fs from "fs";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import mime from "mime-types";
 import { isAdminRequest } from "./auth/[...nextauth]";
 import { mongooseConect } from "@/lib/mongoose";
@@ -61,3 +61,5 @@ export default async function handle(req, res) {
 export const config = {
   api: { bodyParser: false },
 };
+
+

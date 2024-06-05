@@ -15,6 +15,7 @@ export default function ProductForm({
   properties: assignedProperties,
   stats: assignedStats,
   isFeatured: assignedIsFeatured,
+  isVintage: assignedIsVintage,
 }) {
   const [title, setTitle] = useState(existingTitle || "");
   const [price, setPrice] = useState(existingPrice || "");
@@ -29,6 +30,7 @@ export default function ProductForm({
   );
   const [isFeatured, setIsFeatured] = useState(assignedIsFeatured || false);
   const [stats, setStats] = useState(assignedStats || []);
+  const [isVintage, setIsVintage] = useState(assignedIsVintage || false);
 
   const router = useRouter();
 
@@ -49,10 +51,12 @@ export default function ProductForm({
       category,
       properties: productProperties,
       isFeatured,
+      isVintage,
       stats,
     };
 
-    // console.log(data);
+    console.log(data);
+
     //Check if product contain _id or not , if it contain id that means it is for editing existing product.
     if (_id) {
       // UPDATE
@@ -317,6 +321,17 @@ export default function ProductForm({
           className="m-0 w-10"
           type="checkbox"
           checked={isFeatured}
+        />
+        <label className=" w-30" htmlFor="">
+          Mark as vintage.
+        </label>
+        <input
+          onChange={(ev) => {
+            setIsVintage(ev.target.checked);
+          }}
+          className="m-0 w-10"
+          type="checkbox"
+          checked={isVintage}
         />
       </div>
 

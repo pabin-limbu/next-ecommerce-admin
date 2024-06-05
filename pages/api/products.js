@@ -5,12 +5,14 @@ import { isAdminRequest } from "./auth/[...nextauth]";
 export default async function handle(req, res) {
   const { method } = req;
   await mongooseConect(); // we can use this to get active connection if active or create new connection because we have wrapper component in lib/mongodb file.
-  await isAdminRequest(req, res);
+  //await isAdminRequest(req, res);
 
   if (method === "GET") {
+    console.log("i reached here");
     if (req.query?.id) {
       res.json(await Product.findOne({ _id: req.query.id }));
     } else {
+      console.log("i reached here too");
       res.json(await Product.find());
     }
   }
@@ -26,7 +28,9 @@ export default async function handle(req, res) {
       properties,
       stats,
       isFeatured,
+      isVintage,
     } = req.body;
+
     //create a product.
     const productDoc = await Product.create({
       title,
@@ -37,13 +41,15 @@ export default async function handle(req, res) {
       properties,
       stats,
       isFeatured,
+      isVintage: true,
     });
+
+    console.log(productDoc);
 
     res.json(productDoc);
   }
 
   if (method === "PUT") {
-    console.log("i am in a api/product put method");
     const {
       title,
       description,
@@ -53,6 +59,7 @@ export default async function handle(req, res) {
       properties,
       stats,
       isFeatured,
+      isVintage,
       _id,
     } = req.body;
     await Product.updateOne(
@@ -66,6 +73,7 @@ export default async function handle(req, res) {
         properties,
         stats,
         isFeatured,
+        isVintage,
       }
     ); // later check the res from database and send the response.
     res.json(true);
